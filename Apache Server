@@ -1,0 +1,101 @@
+Configuration of Apache Server on Linux
+
+Introduction:
+Apache is an open source web server software developed by the Apache Software Foundation. It has been among the most preferred web server software since 1996. It has a great role in the development of the World Wide Web. According to the research conducted by Netcraft in 2008, almost 50% of the websites use Apache.
+
+For this project, we need to configure the Apache server that provides web content over the internet. Using Linux as the operating system that runs the processes of the application.
+
+
+Steps:
+.  Download Ubuntu-Desktop on Ubuntu official website
+. Create a virtual machine
+. Run Ubuntu, and install files
+. Write “sudo apt purge apache2 apache2-bin apache2-data apache2-utils”, “sudo rm -fr /etc/apache2” and “sudo rm -fr /var/www” for remove the packages
+.Write “sudo apt update” to update and write “sudo apt install apache2” to install apache
+. Write “127.0.0.1” it should appear a page saying, “It works”, if not says do the step 5 and 6 again
+. Write “sudo apt install net-tools” to install network configurations
+. Write “ifconfig” and copy the ip-address “inet x.x.x.x” and paste on the browser URL for confirmation, it should say “It works”
+. Write “sudo gedit /etc/apache2/sites-enabled/000-default.conf” 
+. Make a copy of the original file as a backup
+. In the same section <VirtualHost:80> 
+Alias /grades "/var/www/student/comp_net/grades/quiz"
+.Write “sudo -i” to have root previlige
+. Write “mkdir -p /var/www/student/comp_net/grades/quiz” to create the folders and the index.html file
+.Write “nano mkdir -p /var/www/student/comp_net/grades/quiz/index,hmtl” to access the html file and edit the file creating the page you want example:
+<!DOCTYPE html>
+<html>
+	<header>
+		<title> Example </title>
+	</header>
+	<body>
+ 		<h1> MY EXAMPLE </h1>
+ 		<p> This is an example </p>
+	</body>
+</html>
+. Write “nano /etc/apache2/sites-available/student.conf” to create the virtual host
+. Write this in the file:
+“<VirtualHost *:80>
+ ServerName student.mygrades.com
+ 
+ ServerAdmin admin@admin.com
+ DocumentRoot /var/www/student
+
+ ErrorLog ${APACHE_LOG_DIR}/error-student.log
+ CustomLog ${APACHE_LOG_DIR}/acces-student.log combined
+
+</VirtualHost>”
+Save and exit
+. Write “a2ensite student.conf” to enable the student site
+. Write “systemctl reload apache2” to reload apache
+.Open the browser and write in this URL http://127.0.0.1/student/comp_net/grades/quiz
+. Write in the configuration file 
+“<Directory "/var/www/private">
+AuthType         Basic
+AuthName      "Enter correct password"
+AuthUserFile  "/var/www/private/password.tx
+Require user erasmus
+</Directory>”
+Save and Exit
+. Write “mkdir /var/www/private” to create the folder
+. Write “htpasswd -c /var/www/password.txt erasmus” to create the password, if you add another user don’t use the “-c” option
+. Write in the configuration file (put the IPAddress – XXX)
+“<Directory "/var/www/protected">
+order deny,allow
+Allow from 127.0.0.1 10.64.104.XXX
+Deny from all
+</Directory>”
+Save and Exit
+. Write “mkdir /var/www/protected” to create the folder
+. In the configuration file comment the <Directory “/var/www/private” </Directory>
+. Move the contents of the configuration file to "/var/www/private/.htaccess" directory.
+. Verify is set “AllowOverride All” 
+. Edit the student account: 
+cd /var/www/student 
+mkdir public_html
+chmod 755 public_html
+echo "Student HomePage" > cd /var/www/student/public_html/index.html
+chmod o+x /home/student
+. Add to the configuration file:
+<VirtualHost A.B.C.D:80>
+  ServerName servername.pl
+  DocumentRoot /var/www/srv1
+  ErrorDocument 404 /error.html
+  ErrorDocument 403 /error.html 
+  <Directory /var/www/srv1>
+   Options Indexes FollowSymLinks MultiViews
+   AllowOverride All
+   Order allow,deny
+    allow from all
+  </Directory>
+ ErrorLog /var/log/apache2/srv1_error.log
+ CustomLog permanent /var/log/apache2/srv1_access.log
+</VirtualHost>
+. Add the same section as in the case of ip-based and in the file “/etc/ hosts” add a mapping from IP address to name (name specified by the ServerName parameter), example:
+192.168.10.20 www.abc.pl 
+192.168.10.20 www.cba.pl
+
+Final Part:
+I configured the Apache Server after researching about it. Steps were understandable on cez2 system and I followed them. Now I can clearly understanding Apache Servers and I know how to create an Apache Server and how to configure it.
+Hasan Serhan UÇAR
+
+
