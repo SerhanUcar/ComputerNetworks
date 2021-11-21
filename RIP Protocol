@@ -3,50 +3,72 @@ RIP Protocol Using Cisco Packet Tracer
 
 Introduction:
 
-(RIP (Router Information Protocol) is a protocol that works with the distance vector algorithm and uses the Bellman-Ford algorithm to calculate routes. RIP is included in the routing devices table as Administrative Distance 120. RIP routers only look at the number of devices it passes through when making the best route selection.
+(RIP (Router Information Protocol) is a protocol that works with the distance vector algorithm and uses the Bellman-Ford algorithm to calculate routes. RIP is included
+in the routing devices table as Administrative Distance 120. RIP routers only look at the number of devices it passes through when making the best route selection.
 
-For this project, we need to configure one of the most powerful of all routing protocols, the Routing Information Protocol, or more commonly referred to as RIP. RIP has four basic components: the routing update process, RIP routing metrics, routing stability, and routing timers. RIP packets contain information about the networks devices can access and the number of routers or gateways a packet must pass to reach its destination address.
+For this project, we need to configure one of the most powerful of all routing protocols, the Routing Information Protocol, or more commonly referred to as RIP. RIP has
+four basic components: the routing update process, RIP routing metrics, routing stability, and routing timers. RIP packets contain information about the networks devices
+can access and the number of routers or gateways a packet must pass to reach its destination address.
 
 
 
 
 Steps:
-. Download Cisco Packet Tracer on the official website https://www.netacad.com/courses/packet-tracer you have to create an account and after that login and select “Resources” > “Download Cisco Packet Tracer”
-. Install and open Cisco Packet Tracer
-. Select “End Devices” on the bottom right and drag and drop 4 “PC-PT” on the blank field.
-. Select “Networks Devices” on the bottom left and select “Switches” and drag and drop 3 “PT-Switch” or “Generic Switch”
-. Select “Routers” on the bottom left and drag and drop 3 “1941” or “Generic Router”
-. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC0” to the “Switch0” and the “Switch0” to the “Router0”
-. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC1” and “PC2” to the “Switch1” and the “Switch1” to the “Router1”
-. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC3” to the “Switch2” and the “Switch2” to the “Router2”
-. Double click the “Router0” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the picture in the hole that is down of the on/off button
-. Double click the “Router1” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the picture in the hole that is down of the on/off button and close
-. Double click the “Router2” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the picture in the hole that is down of the on/off button and close
-. In the bottom left select the connection that looks like a red line with a clock and connect the “Router1” to “Router0”, select “Se0/1/0” on both routers
-. In the bottom left select the connection that looks like a red line with a clock and connect the “Router1” to “Router2”, select “Se0/1/1” on “Router1” and “Se0/1/0” on “Router2” and close
-. Double click on the “PC0” and select “Desktop” tab and select “IP Configuration” 
-. In the “IP Address” put “192.168.1.2”, in the “Subnet Mask” put “255.255.255.0” and in the “Default Gateway” put “192.168.1.1” and close
-. Do the same thing but to “PC1” and the “IP Address” is “192.168.2.2” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.2.1” and close
-. Do the same thing but to “PC2” and the “IP Address” is “192.168.2.3” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.2.1” and close 
-. Do the same thing but to “PC3” and the “IP Address” is “192.168.3.2” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.3.1” and close 
-. Double click on “Router0” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.1.1” and put a check in the “Port Status” and close
-. Double click on “Router1” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.2.1” and put a check in the “Port Status” and close
-. Double click on “Router2” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.3.1” and put a check in the “Port Status” and close
-.  Double click on “Router0” select “Config” tab, select “Se0/1/0”  put the “IP Address” “10.10.0.1” select the “Clock Rate” and chouse “Not Set” put a check in the “Port Status” and close
-.  Double click on “Router1” select “Config” tab, select “Se0/1/0”  put the “IP Address” “10.10.0.2” select the “Clock Rate” and chouse “64000” put a check in the “Port Status”, select “Se0/1/1” put the “IP Address” “11.10.0.1” select the “Clock Rate” and chouse “64000” put a check in the “Port Status” and close
-. Double click on “Router2” select “Config” tab, select “Se0/1/0”  put the “IP Address” “11.10.0.2” select the “Clock Rate” and chouse “Not Set” put a check in the “Port Status” and close
-. Double click on “Router0” select “Config” tab, select “RIP” put in “Network” the IP address “10.0.0.0” press “Add” and put “192.168.1.0”, select “Settings” press “Save” on NVRAM and close
-. Double click on “Router1” select “Config” tab, select “RIP” put in “Network” the IP address “10.0.0.0” press “Add”, put also “11.0.0.0” and put “192.168.2.0”, select “Settings” press “Save” on NVRAM and close
-. Double click on “Router2” select “Config” tab, select “RIP” put in “Network” the IP address “11.0.0.0” press “Add” and put “192.168.3.0”, select “Settings” press “Save” on NVRAM and close
-
-. On the top left of the program select the icon that looks like an close envelope with a plus sign (Add Simple PDU), and select “PC0” and “Router0”, in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address is wrong
-. Test the same from “PC1” to “PC2”, and “PC1” to “Router1” in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address is wrong
-. Test the same from “PC3” to “Router2”, if it says “Failed” repeat this step or it’s because the IP address is wrong
-. Same thing for “PC0” to “PC1”, in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address or the RIP networks it’s wrong
-. Same thing for “PC1” to “PC4”, in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address or the RIP networks it’s wrong
-
+	. Download Cisco Packet Tracer on the official website https://www.netacad.com/courses/packet-tracer you have to create an account and after that login and select
+	  “Resources” > “Download Cisco Packet Tracer”
+	. Install and open Cisco Packet Tracer
+	. Select “End Devices” on the bottom right and drag and drop 4 “PC-PT” on the blank field.
+	. Select “Networks Devices” on the bottom left and select “Switches” and drag and drop 3 “PT-Switch” or “Generic Switch”
+	. Select “Routers” on the bottom left and drag and drop 3 “1941” or “Generic Router”
+	. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC0” to the “Switch0” and the “Switch0” to the “Router0”
+	. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC1” and “PC2” to the “Switch1” and the “Switch1” to the 
+	  “Router1”
+	. Select “Connections” on the bottom left and select the icon that looks like a lightning bolt, connect “PC3” to the “Switch2” and the “Switch2” to the “Router2”
+	. Double click the “Router0” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the
+	  picture in the hole that is down of the on/off button
+	. Double click the “Router1” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the 
+	  picture in the hole that is down of the on/off button and close
+	. Double click the “Router2” and on the picture click on the on/off button (“I/O) and select “HWIC-2T” it will show a picture on the bottom right drag and drop the
+	  picture in the hole that is down of the on/off button and close
+	. In the bottom left select the connection that looks like a red line with a clock and connect the “Router1” to “Router0”, select “Se0/1/0” on both routers
+	. In the bottom left select the connection that looks like a red line with a clock and connect the “Router1” to “Router2”, select “Se0/1/1” on “Router1” and “Se0/1/0”
+	  on “Router2” and close
+	. Double click on the “PC0” and select “Desktop” tab and select “IP Configuration” 
+	. In the “IP Address” put “192.168.1.2”, in the “Subnet Mask” put “255.255.255.0” and in the “Default Gateway” put “192.168.1.1” and close
+	. Do the same thing but to “PC1” and the “IP Address” is “192.168.2.2” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.2.1” and close
+	. Do the same thing but to “PC2” and the “IP Address” is “192.168.2.3” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.2.1” and close 
+	. Do the same thing but to “PC3” and the “IP Address” is “192.168.3.2” the “Subnet Mask” is the same as “PC0” and the “Default Gateway” is “192.168.3.1” and close 
+	. Double click on “Router0” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.1.1” and put a check in the “Port
+	  Status” and close
+	. Double click on “Router1” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.2.1” and put a check in the “Port
+	  Status” and close
+	. Double click on “Router2” select “Config” tab, select “GigabitEthernet0/0” or “FastEthernet0/0” put the “IP Address” “192.168.3.1” and put a check in the “Port 
+	  Status” and close
+	. Double click on “Router0” select “Config” tab, select “Se0/1/0”  put the “IP Address” “10.10.0.1” select the “Clock Rate” and chouse “Not Set” put a check in the 
+	  “Port Status” and close
+	. Double click on “Router1” select “Config” tab, select “Se0/1/0”  put the “IP Address” “10.10.0.2” select the “Clock Rate” and chouse “64000” put a check in the 
+	  “Port Status”, select “Se0/1/1” put the “IP Address” “11.10.0.1” select the “Clock Rate” and chouse “64000” put a check in the “Port Status” and close
+	. Double click on “Router2” select “Config” tab, select “Se0/1/0”  put the “IP Address” “11.10.0.2” select the “Clock Rate” and chouse “Not Set” put a check in the
+	  “Port Status” and close
+	. Double click on “Router0” select “Config” tab, select “RIP” put in “Network” the IP address “10.0.0.0” press “Add” and put “192.168.1.0”, select “Settings” press 
+	  “Save” on NVRAM and close
+	. Double click on “Router1” select “Config” tab, select “RIP” put in “Network” the IP address “10.0.0.0” press “Add”, put also “11.0.0.0” and put “192.168.2.0”, 
+	  select “Settings” press “Save” on NVRAM and close
+	. Double click on “Router2” select “Config” tab, select “RIP” put in “Network” the IP address “11.0.0.0” press “Add” and put “192.168.3.0”, select “Settings” press 
+	  “Save” on NVRAM and close
+	. On the top left of the program select the icon that looks like an close envelope with a plus sign (Add Simple PDU), and select “PC0” and “Router0”, in the bottom 
+	  right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address is wrong
+	. Test the same from “PC1” to “PC2”, and “PC1” to “Router1” in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the
+	  IP address is wrong
+	. Test the same from “PC3” to “Router2”, if it says “Failed” repeat this step or it’s because the IP address is wrong
+	. Same thing for “PC0” to “PC1”, in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address or the RIP 
+	  networks it’s wrong
+	. Same thing for “PC1” to “PC4”, in the bottom right should say “Successful”, if it says “Failed” repeat this step or it’s because the IP address or the RIP
+	  networks it’s wrong
+	
 Conclusion: 
- After research about Routing  Information Protocol (RIP) and Cisco Packet Tracer, I can create a simulation of RIP. And it provides a connection between of 3 Routers, 4 computers and 3 switches.
+ After research about Routing  Information Protocol (RIP) and Cisco Packet Tracer, I can create a simulation of RIP. And it provides a connection between of 3 Routers, 
+ 4 computers and 3 switches.
 
 								Hasan Serhan UÇAR
 
