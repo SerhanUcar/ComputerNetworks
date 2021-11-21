@@ -1,16 +1,19 @@
 Configuration of Apache Server on Linux
 
 Introduction:
-Apache is an open source web server software developed by the Apache Software Foundation. It has been among the most preferred web server software since 1996. It has a great role in the development of the World Wide Web. According to the research conducted by Netcraft in 2008, almost 50% of the websites use Apache.
+	Apache is an open source web server software developed by the Apache Software Foundation. It has been among the most preferred web server software since 1996. 
+It has a great role in the development of the World Wide Web. According to the research conducted by Netcraft in 2008, almost 50% of the websites use Apache.
 
-For this project, we need to configure the Apache server that provides web content over the internet. Using Linux as the operating system that runs the processes of the application.
+	For this project, we need to configure the Apache server that provides web content over the internet. Using Linux as the operating system that runs the processes of
+the application.
 
 
 Steps:
-.  Download Ubuntu-Desktop on Ubuntu official website
-. Create a virtual machine
-. Run Ubuntu, and install files
-. Write “sudo apt purge apache2 apache2-bin apache2-data apache2-utils”, “sudo rm -fr /etc/apache2” and “sudo rm -fr /var/www” for remove the packages
+<ul>
+	<li>Download Ubuntu-Desktop on Ubuntu official website</li>
+	<li>Create a virtual machine</li>
+	<li>Run Ubuntu, and install files</li>
+	<li>Write “sudo apt purge apache2 apache2-bin apache2-data apache2-utils”, “sudo rm -fr /etc/apache2” and “sudo rm -fr /var/www” for remove the packages</li>
 .Write “sudo apt update” to update and write “sudo apt install apache2” to install apache
 . Write “127.0.0.1” it should appear a page saying, “It works”, if not says do the step 5 and 6 again
 . Write “sudo apt install net-tools” to install network configurations
@@ -22,6 +25,7 @@ Alias /grades "/var/www/student/comp_net/grades/quiz"
 .Write “sudo -i” to have root previlige
 . Write “mkdir -p /var/www/student/comp_net/grades/quiz” to create the folders and the index.html file
 .Write “nano mkdir -p /var/www/student/comp_net/grades/quiz/index,hmtl” to access the html file and edit the file creating the page you want example:
+</ul>
 <!DOCTYPE html>
 <html>
 	<header>
@@ -95,7 +99,8 @@ chmod o+x /home/student
 192.168.10.20 www.cba.pl
 
 Final Part:
-I configured the Apache Server after researching about it. Steps were understandable on cez2 system and I followed them. Now I can clearly understanding Apache Servers and I know how to create an Apache Server and how to configure it.
+	I configured the Apache Server after researching about it. Steps were understandable on cez2 system and I followed them. Now I can clearly understanding Apache Servers 
+and I know how to create an Apache Server and how to configure it.
 Hasan Serhan UÇAR
 
 
