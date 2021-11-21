@@ -1,72 +1,77 @@
-Configuration of Mail Server on Linux
+Configuration of Mail Server on Linux:
 
-Introduction: Mail Server is a remote or central server that keeps all email for users on a network. We can compare Mail Server to a physical post office. Likewise, in this virtual post office, people's mails are stored until they reach their final stop. Mail Server also helps users to easily access their own mail through a database by contacting the e-mail software they use.
+Introduction: Mail Server is a remote or central server that keeps all email for users on a network. We can compare Mail Server to a physical post office. Likewise, in this 
+virtual post office, people's mails are stored until they reach their final stop. Mail Server also helps users to easily access their own mail through a database by
+contacting the e-mail software they use.
 
 Steps:
-. First, set a valid hostname for Ubuntu server and we have to write: 
-$ sudo hostnamectl set-hostname mail.tecmint.com 
-. Next,  I added a MX and A records for my domain in my DNS control panel.
-MX record    @           mail.tecmint.com
-mail.tecmint.com        <IP-address>
-. In order to create a running mail server using “Roundcube”, I had to install Apache2, MariaDB, and PHP packages first, to do so, run.
-$ sudo apt-get update -y
-$ sudo apt-get upgrade –y
-$ sudo apt install apache2 apache2-utils mariadb-server mariadb-client php7.4 libapache2-mod-php7.4 php7.4-mysql php-net-ldap2 php-net-ldap3 php-imagick php7.4-common php7.4-gd php7.4-imap php7.4-json php7.4-curl php7.4-zip php7.4-xml php7.4-mbstring php7.4-bz2 php7.4-intl php7.4-gmp php-net-smtp php-mail-mime php-net-idna2 mailutils
-. I needed to download and install the “SURY PHP PPA” repository to install PHP 7.4 as shown.
-$ sudo apt -y install lsb-release apt-transport-https ca-certificates 
-$ sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-$ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-$ sudo apt update
-. Postfix is a mail transfer agent (MTA) which is the responsible software for delivering & receiving emails, it’s essential in order to create a complete mail server. I ran this to install it.
-$ sudo apt-get install postfix
-. Once Postfix installed, it will automatically start and creates a new /etc/postfix/main.cf file. I could verify the Postfix version and status of the service using the following commands.
-$ postconf mail_version
-$ sudo systemctl status postfix
-. Now try to check my mail server is connecting on port 25 using the following command.
-$ telnet gmail-smtp-in.l.google.com 25
-Trying 74.125.200.27...
-Connected to gmail-smtp-in.l.google.com.
-Escape character is '^]'.
-220 mx.google.com ESMTP k12si849250plk.430 - gsmtp
-. You can also use a mail program to send and read emails using the following command.
-$ mail username@gmail.com
-Cc: 
-Subject: Testing My Postfix Mail Server
-I'm sending this email using the postfix mail server from Ubuntu machine
-.  Dovecot is a mail delivery agent (MDA), it delivers the emails from/to the mail server, to install it, run the following command.
-$ sudo apt-get install dovecot-imapd dovecot-pop3d
-. Next, restart the Dovecot service using the following command.
-$ sudo systemctl restart dovecot
-. Roundcube is the webmail server that you’ll be using to manage emails on your server, it has a simple web interface to do the job, it can be customized by installing more modules & themes.
-$ wget https://github.com/roundcube/roundcubemail/releases/download/1.4.8/roundcubemail-1.4.8.tar.gz
-$ tar -xvf roundcubemail-1.4.8.tar.gz
-$ sudo mv roundcubemail-1.4.8 /var/www/html/roundcubemail
-$ sudo chown -R www-data:www-data /var/www/html/roundcubemail/
-$ sudo chmod 755 -R /var/www/html/roundcubemail/
-. Next, I need to create a new database and user for Roundcube and grant all permission to a new user to write to the database.
-$ sudo mysql -u root
-MariaDB [(none)]> CREATE DATABASE roundcube DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-MariaDB [(none)]> CREATE USER roundcubeuser@localhost IDENTIFIED BY 'password';
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON roundcube.* TO roundcubeuser@localhost;
-MariaDB [(none)]> flush privileges;
-MariaDB [(none)]> quit;
-. Next, import the initial tables to the Roundcube database.
-$ sudo mysql roundcube < /var/www/html/roundcubemail/SQL/mysql.initial.sql
-. Create an apache virtual host for Roundcube webmail.
-$ sudo nano /etc/apache2/sites-available/roundcube.conf
-. Next, enable this virtual host and reload the apache for the changes.
-$ sudo a2ensite roundcube.conf
-$ sudo systemctl reload apache2
-. After finishing the installation and the final tests please delete the installer folder and make sure that enable_installer option in config.inc.php is disabled.
-$ sudo rm /var/www/html/roundcubemail/installer/ -r
-.  Now go to the login page and enter the user name and the password of the user.
-http://yourdomain.com/roundcubemail/
-. In order to start using the Roundcube webmail, I will have to create a new user, to do so, run.
-$ sudo useradd myusername
-. Replace “myusername” with the username you want, create a password for the new user by running.
-$ sudo passwd myusername
-. Now go back to the login page and enter the user name and the password of the newly created user.
-
-Conclusion: In this project, I learned how to do installing the Postfix mail server with the “Roundcube” webmail application and its dependencies on Linux. I learned how to create an email server on Linux powered machines can be one of the most essential things that every system administrator needs to do while configuring the servers for the first time, it’s simple, I made a website like “example.com”, and I created an email account like “username@example.com” to use it to send/receive emails easily instead of using services like Hotmail, Gmail, Yahoo Mail, etc.
+	. First, set a valid hostname for Ubuntu server and we have to write: 
+		$ sudo hostnamectl set-hostname mail.tecmint.com 
+	. Next,  I added a MX and A records for my domain in my DNS control panel.
+		MX record    @           mail.tecmint.com
+		mail.tecmint.com        <IP-address>
+	. In order to create a running mail server using “Roundcube”, I had to install Apache2, MariaDB, and PHP packages first, to do so, run.
+		$ sudo apt-get update -y
+		$ sudo apt-get upgrade –y
+		$ sudo apt install apache2 apache2-utils mariadb-server mariadb-client php7.4 libapache2-mod-php7.4 php7.4-mysql php-net-ldap2 php-net-ldap3 php-imagick php7.4-common php7.4-gd php7.4-imap php7.4-json php7.4-curl php7.4-zip php7.4-xml php7.4-mbstring php7.4-bz2 php7.4-intl php7.4-gmp php-net-smtp php-mail-mime php-net-idna2 mailutils
+	. I needed to download and install the “SURY PHP PPA” repository to install PHP 7.4 as shown.
+		$ sudo apt -y install lsb-release apt-transport-https ca-certificates 
+		$ sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+		$ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+		$ sudo apt update
+	. Postfix is a mail transfer agent (MTA) which is the responsible software for delivering & receiving emails, it’s essential in order to create a complete mail server. I ran this to install it.
+		$ sudo apt-get install postfix
+	. Once Postfix installed, it will automatically start and creates a new /etc/postfix/main.cf file. I could verify the Postfix version and status of the service using the following commands.
+		$ postconf mail_version
+		$ sudo systemctl status postfix
+	. Now try to check my mail server is connecting on port 25 using the following command.
+		$ telnet gmail-smtp-in.l.google.com 25
+		Trying 74.125.200.27...
+		Connected to gmail-smtp-in.l.google.com.
+		Escape character is '^]'.
+		220 mx.google.com ESMTP k12si849250plk.430 - gsmtp
+	. You can also use a mail program to send and read emails using the following command.
+		$ mail username@gmail.com
+		Cc: 
+		Subject: Testing My Postfix Mail Server
+		I'm sending this email using the postfix mail server from Ubuntu machine
+	.  Dovecot is a mail delivery agent (MDA), it delivers the emails from/to the mail server, to install it, run the following command.
+		$ sudo apt-get install dovecot-imapd dovecot-pop3d
+	. Next, restart the Dovecot service using the following command.
+		$ sudo systemctl restart dovecot
+	. Roundcube is the webmail server that you’ll be using to manage emails on your server, it has a simple web interface to do the job, it can be customized by installing more modules & themes.
+		$ wget https://github.com/roundcube/roundcubemail/releases/download/1.4.8/roundcubemail-1.4.8.tar.gz
+		$ tar -xvf roundcubemail-1.4.8.tar.gz
+		$ sudo mv roundcubemail-1.4.8 /var/www/html/roundcubemail
+		$ sudo chown -R www-data:www-data /var/www/html/roundcubemail/
+		$ sudo chmod 755 -R /var/www/html/roundcubemail/
+	. Next, I need to create a new database and user for Roundcube and grant all permission to a new user to write to the database.
+		$ sudo mysql -u root
+		MariaDB [(none)]> CREATE DATABASE roundcube DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+		MariaDB [(none)]> CREATE USER roundcubeuser@localhost IDENTIFIED BY 'password';
+		MariaDB [(none)]> GRANT ALL PRIVILEGES ON roundcube.* TO roundcubeuser@localhost;
+		MariaDB [(none)]> flush privileges;
+		MariaDB [(none)]> quit;
+	. Next, import the initial tables to the Roundcube database.
+		$ sudo mysql roundcube < /var/www/html/roundcubemail/SQL/mysql.initial.sql
+	. Create an apache virtual host for Roundcube webmail.
+		$ sudo nano /etc/apache2/sites-available/roundcube.conf
+	. Next, enable this virtual host and reload the apache for the changes.
+		$ sudo a2ensite roundcube.conf
+		$ sudo systemctl reload apache2
+	. After finishing the installation and the final tests please delete the installer folder and make sure that enable_installer option in config.inc.php is disabled.
+		$ sudo rm /var/www/html/roundcubemail/installer/ -r
+	.  Now go to the login page and enter the user name and the password of the user.
+		http://yourdomain.com/roundcubemail/
+	. In order to start using the Roundcube webmail, I will have to create a new user, to do so, run.
+		$ sudo useradd myusername
+	. Replace “myusername” with the username you want, create a password for the new user by running.
+		$ sudo passwd myusername
+	. Now go back to the login page and enter the user name and the password of the newly created user.
+	
+Conclusion: In this project, I learned how to do installing the Postfix mail server with the “Roundcube” webmail application and its dependencies on Linux. I have learned
+how to create an email server on Linux powered machines can be one of the most essential things that every system administrator needs to do while configuring the servers 
+for the first time, it’s simple, I made a website like “example.com”, and I created an email account like “username@example.com” to use it to send/receive emails easily
+instead of using services like Hotmail, Gmail, Yahoo Mail, etc.
 
 							Hasan Serhan UÇAR
